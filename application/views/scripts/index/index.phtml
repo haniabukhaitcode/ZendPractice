@@ -1,0 +1,41 @@
+<!--for display text and submit fields i use viewHelpers it's very comfortable and easy way.-->
+<div class="submit_area">
+    <?php echo $this->formText('message', 'empty', array('size' => 32, 'id' => 'message')) ?>
+    <?php echo $this->formSubmit('submitTo', 'submit', array('id' => 'submitTo')) ?>
+
+    <div class="show-msg"></div>
+</div>
+
+
+<script type="text/javascript">
+    //for send data i'll use jquery library
+    $(document).ready(
+        function() {
+
+            //By clicking on button submit condition makes validate on empty message 
+            //unless field message will be not empty  , the programm make send data to
+            //controller via ajax
+            $("#submitTo").click(function() {
+                var message = $('#message').val();
+                if (message != '') {
+                    //run ajax 
+                    $.post('index/ajax', {
+                            'message': message
+                        },
+
+                        //callback function
+                        function(respond) {
+
+                            //put respond in class show-msg
+
+                            $(".show-msg").html(respond);
+
+                        }
+                    );
+                }
+
+            });
+
+
+        }
+    );
