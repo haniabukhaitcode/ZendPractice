@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends Zend_Controller_Action
+class AlbumsController extends Zend_Controller_Action
 {
 
     public function init()
@@ -31,12 +31,10 @@ class IndexController extends Zend_Controller_Action
     //     //return callback message to the function javascript
     //     echo $message;
     // }
-    public function albumsAction()
+    public function allAction()
     {
         $albums = new Application_Model_DbTable_Albums();
         $albums = $albums->fetchAll();
-
-        // return response as data key contains array of albums
         $this->_helper->json->sendJson(array('data' => $albums->toArray()));
     }
 
