@@ -6,6 +6,7 @@ class Application_Form_Album extends Zend_Form
         $this->setName('album');
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
+
         $artist = new Zend_Form_Element_Text('artist');
         $artist->setLabel('Artist')
             ->setRequired(true)
@@ -18,8 +19,17 @@ class Application_Form_Album extends Zend_Form
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addValidator('NotEmpty');
+
+        $tag = new Zend_Form_Element_Text('tag');
+        $tag->setLabel('Tag')
+            ->setRequired(true)
+            ->addFilter('StripTags')
+            ->addFilter('StringTrim')
+            ->addValidator('NotEmpty');
+
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
-        $this->addElements([$id, $artist, $title, $submit]);
+
+        $this->addElements([$id, $artist, $title, $tag, $submit]);
     }
 }

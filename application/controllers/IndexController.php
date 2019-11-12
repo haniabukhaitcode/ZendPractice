@@ -20,6 +20,7 @@ class IndexController extends Zend_Controller_Action
         $albums = $albums->fetchAll();
 
         // return response as data key contains array of albums
+
         $this->_helper->json->sendJson(['data' => $albums->toArray()]);
     }
 
@@ -34,8 +35,9 @@ class IndexController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
+                $tag = $form->getValue('tagName');
                 $albums = new Application_Model_DbTable_Albums();
-                $albums->addAlbum($artist, $title);
+                $albums->addAlbum($artist, $title,  $tag);
 
                 $this->_helper->redirector('index');
             } else {
@@ -56,8 +58,9 @@ class IndexController extends Zend_Controller_Action
                 $id = (int) $form->getValue('id');
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
+                $tag = $form->getValue('tagName');
                 $albums = new Application_Model_DbTable_Albums();
-                $albums->editAlbum($id, $artist, $title);
+                $albums->editAlbum($id, $artist, $title, $tag);
 
                 $this->_helper->redirector('index');
             } else {

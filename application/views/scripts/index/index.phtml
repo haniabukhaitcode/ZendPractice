@@ -6,12 +6,14 @@ $this->headTitle($this->title);
     <div class="row no-gutters">
         <div class="col-12">
             <h4 class="col-12"><a href="<?= $this->url(['controller' => 'index', 'action' => 'add']); ?>">Create Albums</a></h4>
-            <table class="table table-striped table-bordered table-hover" style="width:100%;" id="albumTable">
+            <table id="user_data" class="table table-striped table-bordered table-hover" style="width:100%;" id="albumTable">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Artists</th>
                         <th scope="col">Title</th>
+                        <th scope="col">Artists</th>
+                        <th scope="col">Tags</th>
+
                         <th id="removeSort" scope="col">Action</th>
                     </tr>
 

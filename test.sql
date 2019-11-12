@@ -49,40 +49,24 @@ VALUES
   CREATE TABLE `books` (
     `id` int(11) NOT NULL,
     `title` varchar(256) NOT NULL,
-    `artist_id` int(11) DEFAULT NULL,
-    `book_image` varchar(255) NOT NULL
+    `artist_id` int(11) DEFAULT NULL
   ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 --
   -- Dumping data for table `books`
   --
 INSERT INTO
-  `books` (`id`, `title`, `artist_id`, `book_image`)
+  `books` (`id`, `title`, `artist_id`)
 VALUES
-  (
-    52,
-    'Software Developer',
-    13,
-    'download (1).jpeg'
-  ),
-  (
-    53,
-    'Software Developer',
-    12,
-    'download (7).jpeg'
-  ),
-  (54, 'C', 13, 'download (2).jpeg'),
-  (55, 'C++', 14, 'download (7).jpeg'),
-  (
-    57,
-    'Software Developer',
-    13,
-    'download (6).jpeg'
-  ),
-  (58, 'JavaScript', 15, 'download (3).jpeg'),
-  (59, 'PHP', 18, 'download (1).jpeg'),
-  (60, 'Python', 19, 'download.jpeg'),
-  (61, 'Java', 18, 'download (5).jpeg'),
-  (62, 'GoLang', 20, 'download (5).jpeg');
+  (52,'Software Developer',13),
+  (53,'Software Developer',12),
+  (54, 'C', 13),
+  (55, 'C++', 14),
+  (57,'Software Developer',13),
+  (58, 'JavaScript', 15),
+  (59, 'PHP', 18),
+  (60, 'Python', 19),
+  (61, 'Java', 18),
+  (62, 'GoLang', 20);
 -- --------------------------------------------------------
   --
   -- Table structure for table `books_tags`
@@ -123,7 +107,6 @@ VALUES
     `id` int(11),
     `artist_id` int(11),
     `title` varchar(256),
-    `book_image` varchar(255),
     `artistName` varchar(256)
   );
 -- --------------------------------------------------------
@@ -139,7 +122,6 @@ VALUES
     `artist_id` int(11),
     `artist` varchar(256),
     `title` varchar(256),
-    `book_image` varchar(255),
     `tagName` text,
     `tagID` text
   );
@@ -156,7 +138,6 @@ VALUES
     `artist_id` int(11),
     `artist` varchar(256),
     `title` varchar(256),
-    `book_image` varchar(255),
     `tagName` text,
     `tagID` text
   );
@@ -193,7 +174,6 @@ select
   `books`.`id` AS `id`,
   `books`.`artist_id` AS `artist_id`,
   `books`.`title` AS `title`,
-  `books`.`book_image` AS `book_image`,
   `artists`.`artist` AS `artistName`
 from
   (
@@ -214,7 +194,6 @@ select
   `books`.`artist_id` AS `artist_id`,
   `artists`.`artist` AS `artist`,
   `books`.`title` AS `title`,
-  `books`.`book_image` AS `book_image`,
   group_concat(
     `tags`.`tag`
     order by
@@ -230,11 +209,11 @@ from
     (
       (
         `books`
-        join `artists` on((`artists`.`id` = `books`.`artist_id`))
+        LEFT join `artists` on((`artists`.`id` = `books`.`artist_id`))
       )
-      join `books_tags` on((`books_tags`.`book_id` = `books`.`id`))
+     LEFT join `books_tags` on((`books_tags`.`book_id` = `books`.`id`))
     )
-    join `tags` on((`tags`.`id` = `books_tags`.`tag_id`))
+    LEFT join `tags` on((`tags`.`id` = `books_tags`.`tag_id`))
   )
 group by
   `books`.`id`
@@ -254,7 +233,6 @@ select
   `books`.`artist_id` AS `artist_id`,
   `artists`.`artist` AS `artist`,
   `books`.`title` AS `title`,
-  `books`.`book_image` AS `book_image`,
   group_concat(
     `tags`.`tag`
     order by

@@ -10,3 +10,8 @@ view produce html output
 controller returns data to application
 http response is returned 
 http response sent to client
+
+
+
+
+select `zftutorial`.`books`.`id` AS `id`,`zftutorial`.`tags`.`tag` AS `tag`,`zftutorial`.`books_tags`.`tag_id` AS `tag_id`,`zftutorial`.`books_tags`.`book_id` AS `book_id`,`zftutorial`.`books`.`artist_id` AS `artist_id`,`zftutorial`.`artists`.`artist` AS `artist`,`zftutorial`.`books`.`title` AS `title`,group_concat(`zftutorial`.`tags`.`tag` order by `zftutorial`.`books`.`id` ASC separator ',') AS `tagName`,group_concat(`zftutorial`.`tags`.`id` order by `zftutorial`.`books`.`id` ASC separator ',') AS `tagID` from (((`zftutorial`.`books` left join `zftutorial`.`artists` on((`zftutorial`.`artists`.`id` = `zftutorial`.`books`.`artist_id`))) left join `zftutorial`.`books_tags` on((`zftutorial`.`books_tags`.`book_id` = `zftutorial`.`books`.`id`))) left join `zftutorial`.`tags` on((`zftutorial`.`tags`.`id` = `zftutorial`.`books_tags`.`tag_id`))) group by `zftutorial`.`books`.`id` order by `zftutorial`.`books`.`id`
