@@ -13,31 +13,14 @@ class IndexController extends Zend_Controller_Action
         $this->view->username = "hani";
         // action body
     }
-    // public function ajaxAction()
-    // {
-    //     //get post request (standart approach) 
-    //     $request = $this->getRequest()->getPost();
 
-    //     //referring to the index
-    //     //gets value from ajax request 
-    //     $message = $request['message'];
-
-    //     // makes disable renderer
-    //     $this->_helper->viewRenderer->setNoRender();
-
-    //     //makes disable layout
-    //     $this->_helper->getHelper('layout')->disableLayout();
-
-    //     //return callback message to the function javascript
-    //     echo $message;
-    // }
     public function albumsAction()
     {
         $albums = new Application_Model_DbTable_Albums();
         $albums = $albums->fetchAll();
 
         // return response as data key contains array of albums
-        $this->_helper->json->sendJson(array('data' => $albums->toArray()));
+        $this->_helper->json->sendJson(['data' => $albums->toArray()]);
     }
 
     function addAction()
