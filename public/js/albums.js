@@ -27,22 +27,19 @@ $(document).ready(function () {
     });
   }
 
-  $('#albumTable').ajaxForm(options);
+  $('#album').ajaxForm(options);
 
   $('#add_button').click(function () {
-    $('#albumTable')[0].reset();
+    $('#album')[0].reset();
 
-    $('.modal-title').text('Add User');
-    $('.select2-single').select2({
+    $('.select2-artist').select2({
       width: null,
     });
 
-    $('#e2').select2({
+    $('#artist').select2({
       allowClear: true,
     });
-    $('#action').val('Add');
-    $('#operation').val('Add');
-    $('#user_uploaded_image').html('');
+
   });
 
   var dataTable = $('#user_data').DataTable({
@@ -81,6 +78,8 @@ $(document).ready(function () {
       },
     ],
   });
+
+
 
 
 });

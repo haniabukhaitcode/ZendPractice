@@ -1,18 +1,24 @@
 <?php
 class Application_Form_Album extends Zend_Form
 {
-    public function init()
+    public function init($options = null)
     {
         $this->setName('album');
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
 
-        $artist = new Zend_Form_Element_Text('artist');
+        // return response as data key contains array of albums
+
+
+        $artist = new Zend_Form_Element_Select('artist');
         $artist->setLabel('Artist')
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
-            ->addValidator('NotEmpty');
+            ->addValidator('NotEmpty')
+            ->addMultiOptions(['']);
+        $this->addElement($artist);
+
         $title = new Zend_Form_Element_Text('title');
         $title->setLabel('Title')
             ->setRequired(true)
