@@ -29,7 +29,6 @@ class IndexController extends Zend_Controller_Action
         $form->submit->setLabel('Add');
         $this->view->form = $form;
 
-
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {

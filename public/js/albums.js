@@ -1,15 +1,5 @@
 $(document).ready(function() {
   console.log(username);
-  // var options = {
-  //   clearForm: true,
-  //   ajax: "url",
-  //   success: function(msg) {
-  //     //$("#userModal").modal("hide");
-  //     dataTable.ajax.reload();
-  //   }
-  // };
-
-  // $("#user_form").ajaxForm(options);
 
   $("#albumTable").DataTable({
     sAjaxSource: albumsTableLink,

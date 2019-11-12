@@ -1,0 +1,12 @@
+browser http request recieved
+index.php script executed
+application instance created
+router parses the url
+controller extract request
+model perform logic
+controller passes model to view
+view may use model to retrieve data
+view produce html output
+controller returns data to application
+http response is returned 
+http response sent to client

@@ -20,6 +20,6 @@ class Application_Form_Album extends Zend_Form
             ->addValidator('NotEmpty');
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
-        $this->addElements(array($id, $artist, $title, $submit));
+        $this->addElements([$id, $artist, $title, $submit]);
     }
 }
