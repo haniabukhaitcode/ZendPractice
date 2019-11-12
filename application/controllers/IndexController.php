@@ -10,7 +10,7 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         $this->view->title = "My Albums";
-        $this->view->username = "hani";
+        //$this->view->username = "hani";
         // action body
     }
 
@@ -57,7 +57,7 @@ class IndexController extends Zend_Controller_Action
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
                 $albums = new Application_Model_DbTable_Albums();
-                $albums->updateAlbum($id, $artist, $title);
+                $albums->editAlbum($id, $artist, $title);
 
                 $this->_helper->redirector('index');
             } else {

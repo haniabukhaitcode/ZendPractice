@@ -1,0 +1,78 @@
+<head>
+    <title>Create Books</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/css/select2.min.css">
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.full.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var options = {
+            clearForm: true,
+            resetForm: true,
+            cache: false,
+            ajax: '/application/controllers/IndexController.php',
+            beforeSubmit: validate(),
+
+            success: function(msg) {
+                $('#userModal').modal('hide');
+
+                dataTable.ajax.reload();
+            },
+        };
+        $('#user_form').ajaxForm(options);
+        //for send data i'll use jquery library
+        var dataTable = $('#user_data').DataTable({
+
+            order: [],
+            ajax: {
+                url: '/application/controllers/IndexController.php',
+                type: 'POST',
+            },
+
+            columns: [{
+                    data: 'id'
+                },
+                {
+                    data: 'title'
+                },
+
+                {
+
+                    data: 'artist',
+                },
+
+                {
+                    render: function(data, type, row) {
+                        let btn =
+                            '<td><button type="button" name="edit" id="' +
+                            row.id +
+                            '" class="btn btn-sm btn-primary update">Update</button></td>&nbsp;' +
+                            '<td><button type="button" name="delete" id="' +
+                            row.id +
+                            '" class="btn btn-sm btn-danger delete">Delete</button></td>';
+                        return btn;
+                    },
+                },
+            ],
+            columnDefs: [{
+                orderable: true,
+            }, ]
+
+        });
+    });
