@@ -36,7 +36,7 @@ class IndexController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
-                $albums = new Application_Model_DbTable_Albums();
+                $albums = new Application_Model_DbTable_Add();
                 $albums->addAlbum($artist, $title);
 
                 $this->_helper->redirector('index');
@@ -57,12 +57,12 @@ class IndexController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
-                $id = (int) $form->getValue('id');
+                $id = $form->getValue('id');
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
                 $tag = $form->getValue('tagName');
-                $albums = new Application_Model_DbTable_Albums();
-                $albums->editAlbum($id, $artist, $title, $tag);
+                $albums = new Application_Model_DbTable_Edit();
+                $albums->editAlbum($id, $artist, $title);
 
                 $this->_helper->redirector('index');
             } else {
@@ -83,7 +83,7 @@ class IndexController extends Zend_Controller_Action
             $del = $this->getRequest()->getPost('del');
             if ($del == 'Yes') {
                 $id = $this->getRequest()->getPost('id');
-                $albums = new Application_Model_DbTable_Albums();
+                $albums = new Application_Model_DbTable_Delete();
                 $albums->deleteAlbum($id);
             }
             $this->_helper->redirector('index');

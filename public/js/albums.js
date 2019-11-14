@@ -2,12 +2,12 @@ $(document).ready(function () {
 
   $('#add_button').click(function () {
     $.ajax({
-      url: 'index/add',
+      url: albumsTableAdd,
       type: 'POST',
       datatype: 'json',
       success: function (data) {
         $('.modal-body').html(data);
-        $('#albumModal').modal('show');
+        // $('#albumModal').modal('show');
       }
     });
   });
