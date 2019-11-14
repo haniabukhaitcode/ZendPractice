@@ -36,9 +36,12 @@ echo $this->doctype(); ?>
     </style>
 </head>
 
+
+
 <body>
     <div id="content">
         <h1><?= $this->escape($this->title); ?></h1>
+
         <?= $this->layout()->content; ?>
     </div>
     <?= $this->headScript() ?>

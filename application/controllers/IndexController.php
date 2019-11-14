@@ -26,8 +26,9 @@ class IndexController extends Zend_Controller_Action
 
     function addAction()
     {
+        $this->_helper->layout()->disableLayout();
+        // $this->_helper->viewRenderer->setNoRender(true);
         $form = new Application_Form_Album();
-        $form->submit->setLabel('Add');
         $this->view->form = $form;
 
         if ($this->getRequest()->isPost()) {
@@ -35,9 +36,8 @@ class IndexController extends Zend_Controller_Action
             if ($form->isValid($formData)) {
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
-                $tag = $form->getValue('tagName');
                 $albums = new Application_Model_DbTable_Albums();
-                $albums->addAlbum($artist, $title,  $tag);
+                $albums->addAlbum($artist, $title);
 
                 $this->_helper->redirector('index');
             } else {
@@ -48,6 +48,8 @@ class IndexController extends Zend_Controller_Action
 
     function editAction()
     {
+        $this->_helper->layout()->disableLayout();
+        // $this->_helper->viewRenderer->setNoRender(true);
         $form = new Application_Form_Album();
         $form->submit->setLabel('Save');
         $this->view->form = $form;

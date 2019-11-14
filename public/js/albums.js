@@ -1,48 +1,18 @@
 $(document).ready(function () {
-  var options = {
-
-    clearForm: true,
-    sAjaxSource: albumsTableLink,
-    sAjaxDataProp: "data",
-    cache: false,
-
-    beforeSubmit: validate(),
-
-    success: function (msg) {
-      $('#userModal').modal('hide');
-
-      dataTable.ajax.reload();
-    },
-  };
-
-  function validate() {
-    $('#albumTable').validate({
-      rules: {
-        'title': 'required',
-        'tags[]': 'required',
-      },
-      messages: {
-        'tags[]': 'Select at least one tag',
-      },
-    });
-  }
-
-  $('#album').ajaxForm(options);
 
   $('#add_button').click(function () {
-    $('#album')[0].reset();
-
-    $('.select2-artist').select2({
-      width: null,
+    $.ajax({
+      url: 'index/add',
+      type: 'POST',
+      datatype: 'json',
+      success: function (data) {
+        $('.modal-body').html(data);
+        $('#albumModal').modal('show');
+      }
     });
-
-    $('#artist').select2({
-      allowClear: true,
-    });
-
   });
 
-  var dataTable = $('#user_data').DataTable({
+  $('#user_data').DataTable({
     sAjaxSource: albumsTableLink,
     sAjaxDataProp: "data",
 
@@ -83,4 +53,3 @@ $(document).ready(function () {
 
 
 });
-
