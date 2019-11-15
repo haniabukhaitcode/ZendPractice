@@ -1,44 +1,35 @@
 <?php
-
 class IndexController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */ }
-
     public function indexAction()
     {
         $this->view->title = "My Albums";
-        //$this->view->username = "hani";
-        // action body
     }
 
-    public function albumsAction()
+    public function readAction()
     {
-        $albums = new Application_Model_DbTable_Albums();
+        $albums = new Application_Model_DbTable_Read();
         $albums = $albums->fetchAll();
-
         // return response as data key contains array of albums
-
         $this->_helper->json->sendJson(['data' => $albums->toArray()]);
     }
 
     function addAction()
     {
-        $this->_helper->layout()->disableLayout();
-        // $this->_helper->viewRenderer->setNoRender(true);
-        $form = new Application_Form_Album();
+        $form = new Application_Form_Read();
+        $form->submit->setLabel('Add');
         $this->view->form = $form;
-
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
-                $albums = new Application_Model_DbTable_Add();
-                $albums->addAlbum($artist, $title);
-
+                $tag = $form->getValue('tagName');
+                $albums = new Application_Model_DbTable_Read();
+                $albums->addAlbum($artist, $title,  $tag);
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -48,22 +39,18 @@ class IndexController extends Zend_Controller_Action
 
     function editAction()
     {
-        $this->_helper->layout()->disableLayout();
-        // $this->_helper->viewRenderer->setNoRender(true);
-        $form = new Application_Form_Album();
+        $form = new Application_Form_Read();
         $form->submit->setLabel('Save');
         $this->view->form = $form;
-
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
             if ($form->isValid($formData)) {
-                $id = $form->getValue('id');
+                $id = (int) $form->getValue('id');
                 $artist = $form->getValue('artist');
                 $title = $form->getValue('title');
                 $tag = $form->getValue('tagName');
-                $albums = new Application_Model_DbTable_Edit();
-                $albums->editAlbum($id, $artist, $title);
-
+                $albums = new Application_Model_DbTable_Read();
+                $albums->editAlbum($id, $artist, $title, $tag);
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -71,7 +58,7 @@ class IndexController extends Zend_Controller_Action
         } else {
             $id = $this->_getParam('id', 0);
             if ($id > 0) {
-                $albums = new Application_Model_DbTable_Albums();
+                $albums = new Application_Model_DbTable_Read();
                 $form->populate($albums->getAlbum($id));
             }
         }
@@ -80,8 +67,8 @@ class IndexController extends Zend_Controller_Action
     public function deleteAction()
     {
         if ($this->getRequest()->isPost()) {
-            $del = $this->getRequest()->getPost('del');
-            if ($del == 'Yes') {
+            $delete = $this->getRequest()->getPost('delete');
+            if ($delete == 'Yes') {
                 $id = $this->getRequest()->getPost('id');
                 $albums = new Application_Model_DbTable_Delete();
                 $albums->deleteAlbum($id);
@@ -89,7 +76,7 @@ class IndexController extends Zend_Controller_Action
             $this->_helper->redirector('index');
         } else {
             $id = $this->_getParam('id', 0);
-            $albums = new Application_Model_DbTable_Albums();
+            $albums = new Application_Model_DbTable_Read();
             $this->view->album = $albums->getAlbum($id);
         }
     }

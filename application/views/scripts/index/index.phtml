@@ -1,59 +1,67 @@
 <?php
 $this->headTitle($this->title);
 ?>
-
 <div class="container">
     <div class="row no-gutters">
         <div class="col-12">
             <h4 class="col-12"> Create Albums</h4>
             <span>
-                <button type="button" id="add_button" data-toggle="modal" data-target="#albumModal" style="cursor:pointer; color:white;" class="btn btn-success col-3 mb-4">Add</button>
+                <a type="button" href="<?= $this->url(['controller' => 'index', 'action' => 'add']); ?>" id="add_button" style="cursor:pointer; color:white;" class="btn btn-success col-3 mb-4">Create Add</a>
             </span>
-            <table id="user_data" class="table table-striped table-bordered table-hover" style="width:100%;" id="albumTable">
+            <table class="table table-striped table-bordered table-hover" id="albumTable">
                 <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Artists</th>
-                        <th scope="col">Tags</th>
-
-                        <th id="removeSort" scope="col">Action</th>
-                    </tr>
-
+                    <th scope="col">ID</th>
+                    <th scope="col">Artists</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Tags</th>
+                    <th id="removeSort" scope="col">Action</th>
                 </thead>
             </table>
         </div>
     </div>
-</div>
+
+    <div id="userModal" role="dialog" class="modal fade">
+        <div class="modal-dialog" role="document">
+            <form method="post" id="user_form" action="Read.php">
+                <div class="modal-content" style="background-color:#32383e">
+                    <div class="modal-header">
+                        <h3 style="margin-left: 0; color:white;" class="modal-title" id="myModalLabel">Add New Data</h3>
+                        <button type="button" class="close" style="color: white" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h1>Body Modal</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <?php
+    // for css files use appendStylesheet
+    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/albums.css', 'screen');
+    ?>
+
+    <?php
+    // for js files use appendFile
+    $this->headScript()->appendFile($this->baseUrl() . '/js/albums.js')
+    ?>
+
+    <?php
+    // variables injected to CSS use $this->placeholder('styleData')->captureStart() and close it with $this->placeholder('styleData')->captureEnd()
+    $this->placeholder('styleData')->captureStart(); ?>
+    .bold-labels .radio-inline, .checkbox-inline{
+    font-weight:bold;
+    }
+    <?php $this->placeholder('styleData')->captureEnd() ?>
 
 
-
-
-
-<?php
-// for css files use appendStylesheet
-// $this->headLink()->appendStylesheet($this->baseUrl() . '/css/albums.css', 'screen');
-?>
-
-<?php
-// for js files use appendFile
-$this->headScript()->appendFile($this->baseUrl() . '/js/albums.js')
-?>
-
-<?php
-// variables injected to CSS use $this->placeholder('styleData')->captureStart() and close it with $this->placeholder('styleData')->captureEnd()
-$this->placeholder('styleData')->captureStart(); ?>
-<!-- .bold-labels .radio-inline, .checkbox-inline{
-font-weight:bold;
-} -->
-<?php $this->placeholder('styleData')->captureEnd() ?>
-
-<?php
-// variables injected to JS use $this->placeholder('jsData')->captureStart() and close it with $this->placeholder('jsData')->captureEnd()
-
-$this->placeholder('jsData')->captureStart(); ?>
-
-var albumsTableLink ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'albums']) ?>';
-var albumsTableAdd ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'add']) ?>';
-
-<?php $this->placeholder('jsData')->captureEnd() ?>
+    <?php
+    // variables injected to JS use $this->placeholder('jsData')->captureStart() and close it with $this->placeholder('jsData')->captureEnd()
+    $this->placeholder('jsData')->captureStart(); ?>
+    var albumsTableLink ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'read']) ?>';
+    var albumsTableLinkDelete ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'delete']) ?>';
+    var albumsTableLinkUpdate ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'update']) ?>';
+    <?php $this->placeholder('jsData')->captureEnd() ?>

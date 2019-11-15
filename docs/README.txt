@@ -14,13 +14,13 @@ Setting Up Your VHOST
 The following is a sample VHOST you might want to consider for your project.
 
 <VirtualHost *:80>
-   DocumentRoot "/var/www/html/zftutorial/public"
-   ServerName zftutorial.local
+   DocumentRoot "/var/www/html/zf-tutorial/public"
+   ServerName zf-tutorial.local
 
    # This should be omitted in the production environment
    SetEnv APPLICATION_ENV development
 
-   <Directory "/var/www/html/zftutorial/public">
+   <Directory "/var/www/html/zf-tutorial/public">
        Options Indexes MultiViews FollowSymLinks
        AllowOverride All
        Order allow,deny
