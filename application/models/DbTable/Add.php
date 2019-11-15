@@ -8,8 +8,8 @@ class Application_Model_DbTable_Add extends Zend_Db_Table_Abstract
     function addAlbum($artist, $title, $tag)
     {
         $data = [
-            'artist' => $artist,
             'title' => $title,
+            'artist' => $artist,
             'tag' => $tag
         ];
         $this->insert($data);

@@ -3,7 +3,9 @@ class IndexController extends Zend_Controller_Action
 {
     public function init()
     {
-        /* Initialize action controller here */ }
+        /* Initialize action controller here */
+        //
+    }
     public function indexAction()
     {
         $this->view->title = "My Albums";
@@ -20,7 +22,7 @@ class IndexController extends Zend_Controller_Action
     function addAction()
     {
         $form = new Application_Form_Read();
-        $form->submit->setLabel('Add');
+        $form->submit->setLabel('Add')->setAttrib('action', 'add');
         $this->view->form = $form;
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -37,7 +39,7 @@ class IndexController extends Zend_Controller_Action
         }
     }
 
-    function editAction()
+    public function editAction()
     {
         $form = new Application_Form_Read();
         $form->submit->setLabel('Save');
@@ -66,6 +68,8 @@ class IndexController extends Zend_Controller_Action
 
     public function deleteAction()
     {
+        $form = new Application_Form_Read();
+        $form->submit->setLabel('Delete')->setAttrib('action', 'delete');
         if ($this->getRequest()->isPost()) {
             $delete = $this->getRequest()->getPost('delete');
             if ($delete == 'Yes') {

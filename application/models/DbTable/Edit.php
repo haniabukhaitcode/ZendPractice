@@ -10,8 +10,8 @@ class Application_Model_DbTable_Edit extends Zend_Db_Table_Abstract
     {
       
         $data = [
-            'artist' => $artist,
             'title' => $title,
+            'artist' => $artist,
             'tag' => $tag
         ];
       

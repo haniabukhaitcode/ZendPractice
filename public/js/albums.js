@@ -12,6 +12,17 @@ $(document).ready(function() {
 	// 		dataTable.ajax.reload();
 	// 	},
 	// };
+	$('#add_button').click(function() {
+		$.ajax({
+			url: albumsTableLinkAdd,
+			type: 'POST',
+			datatype: 'json',
+			success: function(data) {
+				$('.modal-body').html(data);
+				// $('#albumModal').modal('show');
+			},
+		});
+	});
 
 	// function validate() {
 	// 	$('#user_form').validate({
@@ -56,9 +67,7 @@ $(document).ready(function() {
 						'<td><a class="btn btn-sm btn-primary edit" href="index/edit?id=' +
 						row.id +
 						' "> Edit </a></td>' +
-						'<td><a class="btn btn-sm btn-danger delete" href="index/delete?id=' +
-						row.id +
-						' "> Delete </a></td>';
+						'<td><button type="button" id="delete_button" data-toggle="modal" data-target="#albumModal" style="cursor:pointer; color:white;" class="btn btn-sm btn-danger">Delete</button></td>';
 					return btn;
 				},
 			},
@@ -70,26 +79,16 @@ $(document).ready(function() {
 		],
 	});
 
-// 	let btn =
-// 	'<td><button type="button" name="edit" id="' +
-// 	row.id +
-// 	'" class="btn btn-sm btn-primary update">Update</button></td>&nbsp;' +
-// 	'<td><button type="button" name="delete" id="' +
-// 	row.id +
-// 	'" class="btn btn-sm btn-danger delete">Delete</button></td>';
-// return btn;
-
-
-
-	$(document).on('click', '.delete', function() {
+	$('#delete_button').click(function() {
 		$.ajax({
-			method: 'POST',
-			dataType: 'json',
+			url: albumsTableLinkDelete,
+			type: 'POST',
+			datatype: 'json',
 			success: function(data) {
-				$('#userModal .modal-body').html(data);
-				$('.modal-body').modal('show');
-				// dataTable.ajax.reload();
+				$('.modal-body').html(data);
+				// $('#albumModal').modal('show');
 			},
 		});
 	});
+
 });

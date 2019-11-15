@@ -1,12 +1,14 @@
 <?php
 $this->headTitle($this->title);
 ?>
+
 <div class="container">
     <div class="row no-gutters">
         <div class="col-12">
+
             <h4 class="col-12"> Create Albums</h4>
             <span>
-                <a type="button" href="<?= $this->url(['controller' => 'index', 'action' => 'add']); ?>" id="add_button" style="cursor:pointer; color:white;" class="btn btn-success col-3 mb-4">Create Add</a>
+                <button type="button" id="add_button" data-toggle="modal" data-target="#albumModal" style="cursor:pointer; color:white;" class="btn btn-success col-3 mb-4">Add</button>
             </span>
             <table class="table table-striped table-bordered table-hover" id="albumTable">
                 <thead>
@@ -20,24 +22,28 @@ $this->headTitle($this->title);
         </div>
     </div>
 
-    <div id="userModal" role="dialog" class="modal fade">
-        <div class="modal-dialog" role="document">
-            <form method="post" id="user_form" action="Read.php">
-                <div class="modal-content" style="background-color:#32383e">
-                    <div class="modal-header">
-                        <h3 style="margin-left: 0; color:white;" class="modal-title" id="myModalLabel">Add New Data</h3>
-                        <button type="button" class="close" style="color: white" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <h1>Body Modal</h1>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> </div>
-                </div>
-            </form>
+    <div id="albumModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
+</div>
+
+
 
     <?php
     // for css files use appendStylesheet
@@ -62,6 +68,7 @@ $this->headTitle($this->title);
     // variables injected to JS use $this->placeholder('jsData')->captureStart() and close it with $this->placeholder('jsData')->captureEnd()
     $this->placeholder('jsData')->captureStart(); ?>
     var albumsTableLink ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'read']) ?>';
-    var albumsTableLinkDelete ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'delete']) ?>';
+    var albumsTableLinkAdd ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'add']) ?>';
     var albumsTableLinkUpdate ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'update']) ?>';
+    var albumsTableLinkDelete ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'delete']) ?>';
     <?php $this->placeholder('jsData')->captureEnd() ?>
