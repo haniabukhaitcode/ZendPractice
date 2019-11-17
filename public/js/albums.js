@@ -12,6 +12,7 @@ $(document).ready(function() {
 	// 		dataTable.ajax.reload();
 	// 	},
 	// };
+	
 	$('#add_button').click(function() {
 		$.ajax({
 			url: albumsTableLinkAdd,
@@ -24,6 +25,17 @@ $(document).ready(function() {
 		});
 	});
 
+	$('#delete_button').click(function() {
+		$.ajax({
+			url: albumsTableLinkDelete,
+			type: 'POST',
+			datatype: 'json',
+			success: function(data) {
+				$('.modal-body').html(data);
+				// $('#albumModal').modal('show');
+			},
+		});
+	});
 	// function validate() {
 	// 	$('#user_form').validate({
 	// 		rules: {
@@ -78,17 +90,4 @@ $(document).ready(function() {
 			},
 		],
 	});
-
-	$('#delete_button').click(function() {
-		$.ajax({
-			url: albumsTableLinkDelete,
-			type: 'POST',
-			datatype: 'json',
-			success: function(data) {
-				$('.modal-body').html(data);
-				// $('#albumModal').modal('show');
-			},
-		});
-	});
-
 });
