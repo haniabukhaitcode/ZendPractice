@@ -23,8 +23,6 @@ class IndexController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $this->_helper->layout()->disableLayout();
-        // $this->_helper->viewRenderer->setNoRender(true);
         $form = new Application_Form_Read();
         $form->submit->setLabel('Save');
         $this->view->form = $form;
@@ -53,8 +51,6 @@ class IndexController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $this->_helper->layout()->disableLayout();
-        // $this->_helper->viewRenderer->setNoRender(true);
         $form = new Application_Form_Read();
         $form->submit->setLabel('Add')->setAttrib('action', 'add');
         $this->view->form = $form;
@@ -66,7 +62,7 @@ class IndexController extends Zend_Controller_Action
                 $tag = $form->getValue('tagName');
                 $albums = new Application_Model_DbTable_Add();
                 $albums->addAlbum($artist, $title,  $tag);
-
+                
                 $this->_helper->redirector('index');
             } else {
                 $form->populate($formData);
@@ -76,8 +72,6 @@ class IndexController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        $this->_helper->layout()->disableLayout();
-        // $this->_helper->viewRenderer->setNoRender(true);
         if ($this->getRequest()->isPost()) {
             $delete = $this->getRequest()->getPost('delete');
             if ($delete == 'Yes') {

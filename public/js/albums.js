@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
 	// console.log(username);
 	// var options = {
 	// 	clearForm: true,
@@ -12,28 +12,27 @@ $(document).ready(function () {
 	// 		dataTable.ajax.reload();
 	// 	},
 	// };
-
-	$('#add_button').click(function () {
+	
+	$('#add_button').click(function() {
 		$.ajax({
 			url: albumsTableLinkAdd,
 			type: 'POST',
 			datatype: 'json',
-			success: function (data) {
+			success: function(data) {
 				$('.modal-body').html(data);
-				dataTable.ajax.reload()
 				// $('#albumModal').modal('show');
 			},
 		});
 	});
 
-	$('#delete_button').click(function () {
+	$('#delete_button').click(function() {
 		$.ajax({
 			url: albumsTableLinkDelete,
 			type: 'POST',
 			datatype: 'json',
-			success: function (data) {
+			success: function(data) {
 				$('.modal-body').html(data);
-				$('#albumModal').modal('show');
+				// $('#albumModal').modal('show');
 			},
 		});
 	});
@@ -61,21 +60,21 @@ $(document).ready(function () {
 			{ data: 'id' },
 			{ data: 'title' },
 			{
-				render: function (data, type, row, meta) {
+				render: function(data, type, row, meta) {
 					return '<td><a> ' + row.artist + ' </a></td>';
 				},
 				data: 'artist',
 			},
 
 			{
-				render: function (data, type, row, meta) {
+				render: function(data, type, row, meta) {
 					return '<td><a>' + row.tagName + ' </a></td>';
 				},
 				data: 'tagName',
 			},
 
 			{
-				render: function (data, type, row) {
+				render: function(data, type, row) {
 					let btn =
 						'<td><a class="btn btn-sm btn-primary edit" href="index/edit?id=' +
 						row.id +
