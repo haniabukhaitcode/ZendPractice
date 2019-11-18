@@ -1,0 +1,2 @@
+https://framework.zend.com/manual/1.12/en/zend.db.adapter.html#zend.db.adapter.example-database
+https://framework.zend.com/manual/1.12/en/zend.db.table.relationships.html

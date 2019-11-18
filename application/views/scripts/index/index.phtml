@@ -21,9 +21,10 @@ $this->headTitle($this->title);
             </table>
         </div>
     </div>
+</div>
 
-    <div id="userModal" tabindex="-1" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
+<div id="userModal" class="modal fade">
+    <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Modal title</h5>
@@ -39,35 +40,35 @@ $this->headTitle($this->title);
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
-        </div>
     </div>
+</div>
 
 
 
-    <?php
-    // for css files use appendStylesheet
-    $this->headLink()->appendStylesheet($this->baseUrl() . '/css/albums.css', 'screen');
-    ?>
+<?php
+// for css files use appendStylesheet
+$this->headLink()->appendStylesheet($this->baseUrl() . '/css/albums.css', 'screen');
+?>
 
-    <?php
-    // for js files use appendFile
-    $this->headScript()->appendFile($this->baseUrl() . '/js/albums.js')
-    ?>
+<?php
+// for js files use appendFile
+$this->headScript()->appendFile($this->baseUrl() . '/js/albums.js')
+?>
 
-    <?php
-    // variables injected to CSS use $this->placeholder('styleData')->captureStart() and close it with $this->placeholder('styleData')->captureEnd()
-    $this->placeholder('styleData')->captureStart(); ?>
-    .bold-labels .radio-inline, .checkbox-inline{
-    font-weight:bold;
-    }
-    <?php $this->placeholder('styleData')->captureEnd() ?>
+<?php
+// variables injected to CSS use $this->placeholder('styleData')->captureStart() and close it with $this->placeholder('styleData')->captureEnd()
+$this->placeholder('styleData')->captureStart(); ?>
+.bold-labels .radio-inline, .checkbox-inline{
+font-weight:bold;
+}
+<?php $this->placeholder('styleData')->captureEnd() ?>
 
 
-    <?php
-    // variables injected to JS use $this->placeholder('jsData')->captureStart() and close it with $this->placeholder('jsData')->captureEnd()
-    $this->placeholder('jsData')->captureStart(); ?>
-    var albumsTableLink ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'read']) ?>';
-    var albumsTableLinkAdd ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'add']) ?>';
-    var albumsTableLinkEdit ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'edit']) ?>';
-    var albumsTableLinkDelete ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'delete']) ?>';
-    <?php $this->placeholder('jsData')->captureEnd() ?>
+<?php
+// variables injected to JS use $this->placeholder('jsData')->captureStart() and close it with $this->placeholder('jsData')->captureEnd()
+$this->placeholder('jsData')->captureStart(); ?>
+var albumsTableLink ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'read']) ?>';
+var albumsTableLinkAdd ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'add']) ?>';
+var albumsTableLinkEdit ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'edit']) ?>';
+var albumsTableLinkDelete ='<?= $this->url(['module' => 'default', 'controller' => 'index', 'action' => 'delete']) ?>';
+<?php $this->placeholder('jsData')->captureEnd() ?>

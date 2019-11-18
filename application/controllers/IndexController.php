@@ -21,7 +21,7 @@ class IndexController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $this->_helper->layout()->disableLayout();
+        //$this->_helper->layout()->disableLayout();
         $form = new Application_Form_Read();
         $form->setAttrib('action', 'index/add');
         $form->submit->setLabel('Add');

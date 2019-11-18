@@ -1,9 +1,9 @@
 <?php
 class Application_Form_Read extends Zend_Form
 {
-    public function init($options = null)
+    public function init()
     {
-        $this->setName('album')->setAction('');
+        $this->setName('album');
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
 
