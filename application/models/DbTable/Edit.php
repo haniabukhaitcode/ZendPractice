@@ -3,18 +3,18 @@
 class Application_Model_DbTable_Edit extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'fetchTagsAlbums';
-    protected $_primary = 'id';
+    protected $_name = 'albums';
 
-    function editAlbum($id, $artist, $title, $tag)
+
+    function editAlbum($id, $artist_id, $title, $tags)
     {
-      
+
         $data = [
             'title' => $title,
-            'artist' => $artist,
-            'tag' => $tag
+            'artist_id' => $artist_id,
+            'tags' => $tags
         ];
-      
-        $this->update($data, 'id= ' . $id);
+
+        $this->update($data, 'id= ' .  $id);
     }
 }

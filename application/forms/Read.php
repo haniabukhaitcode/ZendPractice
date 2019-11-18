@@ -13,14 +13,17 @@ class Application_Form_Read extends Zend_Form
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addValidator('NotEmpty');
-            $this->addElement($title);
+        $this->addElement($title);
 
-        $artist = new Zend_Form_Element_Select('artist');
+        $artist = new Zend_Form_Element_Select('artist_id');
         $artist->setLabel('Artist')
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addValidator('NotEmpty')
+            ->setAttrib("type", "text")
+            ->setAttrib("style", "width:100%")
+            ->setAttrib("class", "form-control select2-single")
             ->addMultiOptions(
                 [
                     '0' => "Artist1",
@@ -36,12 +39,15 @@ class Application_Form_Read extends Zend_Form
             );
         $this->addElement($artist);
 
-        $tag = new Zend_Form_Element_Multiselect('tag');
-        $tag->setLabel('Tag')
+        $tags = new Zend_Form_Element_Multiselect('tags');
+        $tags->setLabel('Tag')
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addValidator('NotEmpty')
+            ->setAttrib("class", "form-control tags select2-multiple valid")
+            ->setAttrib("aria-invalid", "false")
+            ->setAttrib("style", "width:100%;")
             ->addMultiOptions(
                 [
                     '0' => "Tag1",
@@ -55,10 +61,10 @@ class Application_Form_Read extends Zend_Form
                     '8' => "Tag9"
                 ]
             );
-        $this->addElement($tag);
+        $this->addElement($tags);
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
-        $this->addElements([$id, $artist, $title, $tag, $submit]);
+        $this->addElements([$id, $artist, $title, $tags, $submit]);
     }
 }
