@@ -1,9 +1,9 @@
 <?php
 class Application_Form_Read extends Zend_Form
 {
-    public function init()
+    public function init($options = null)
     {
-        $this->setName('album');
+        $this->setName('album')->setAction('');
         $id = new Zend_Form_Element_Hidden('id');
         $id->addFilter('Int');
 
@@ -15,8 +15,8 @@ class Application_Form_Read extends Zend_Form
             ->addValidator('NotEmpty');
         $this->addElement($title);
 
-        $artist = new Zend_Form_Element_Select('artist_id');
-        $artist->setLabel('Artist')
+        $artist_id = new Zend_Form_Element_Select('artist_id');
+        $artist_id->setLabel('Artist')
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
@@ -37,7 +37,7 @@ class Application_Form_Read extends Zend_Form
                     '8' => "Artist9"
                 ]
             );
-        $this->addElement($artist);
+        $this->addElement($artist_id);
 
         $tags = new Zend_Form_Element_Multiselect('tags');
         $tags->setLabel('Tag')
@@ -65,6 +65,6 @@ class Application_Form_Read extends Zend_Form
 
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->setAttrib('id', 'submitbutton');
-        $this->addElements([$id, $artist, $title, $tags, $submit]);
+        $this->addElements([$id, $artist_id, $title, $tags, $submit]);
     }
 }

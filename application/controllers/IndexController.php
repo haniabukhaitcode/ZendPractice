@@ -19,12 +19,35 @@ class IndexController extends Zend_Controller_Action
         $this->_helper->json->sendJson(['data' => $albums->toArray()]);
     }
 
+    public function addAction()
+    {
+        $this->_helper->layout()->disableLayout();
+        $form = new Application_Form_Read();
+        $form->setAttrib('action', 'index/add');
+        $form->submit->setLabel('Add');
+        $this->view->form = $form;
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($form->isValid($formData)) {
+                $artist_id = $form->getValue('artist_id');
+                $title = $form->getValue('title');
+                $tag = $form->getValue('tags');
+                $albums = new Application_Model_DbTable_Add();
+                $albums->addAlbum($artist_id, $title, implode(",",$tag));
 
+                $this->_helper->redirector('index');
+            } else {
+                $form->populate($formData);
+            }
+        }
+    }
 
     public function editAction()
     {
+        $this->_helper->layout()->disableLayout();
+        // $this->_helper->viewRenderer->setNoRender(true);
         $form = new Application_Form_Read();
-        $form->submit->setLabel('Save');
+        $form->submit->setLabel('Save')->setAttrib("action", "index/edit");
         $this->view->form = $form;
         if ($this->getRequest()->isPost()) {
             $formData = $this->getRequest()->getPost();
@@ -49,29 +72,11 @@ class IndexController extends Zend_Controller_Action
     }
 
 
-    public function addAction()
-    {
-        $form = new Application_Form_Read();
-        $form->submit->setLabel('Add')->setAttrib('action', 'add');
-        $this->view->form = $form;
-        if ($this->getRequest()->isPost()) {
-            $formData = $this->getRequest()->getPost();
-            if ($form->isValid($formData)) {
-                $artist_id = $form->getValue('artist_id');
-                $title = $form->getValue('title');
-                $tag = $form->getValue('tags');
-                $albums = new Application_Model_DbTable_Add();
-                $albums->addAlbum($artist_id, $title, $tag);
 
-                $this->_helper->redirector('index');
-            } else {
-                $form->populate($formData);
-            }
-        }
-    }
 
     public function deleteAction()
     {
+        $this->_helper->layout()->disableLayout();
         if ($this->getRequest()->isPost()) {
             $delete = $this->getRequest()->getPost('delete');
             if ($delete == 'Yes') {
